@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]+PAQUETES
 
 MIDDLEWARE = [
@@ -130,7 +131,8 @@ STATICFILES_DIRS=[
     'static','/mnt/7C4582971554AF5A/var/www/tienda/static'
 ]
 
-MEDIA_ROOT='/mnt/7C4582971554AF5A/var/www/tienda/media'
+#MEDIA_ROOT='/mnt/7C4582971554AF5A/var/www/tienda/media'
+MEDIA_ROOT='media'
 MEDIA_URL='media/'
 
 
