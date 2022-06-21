@@ -1,0 +1,348 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'star-rating-svg/src/css/star-rating-svg.css' %}">
+{% endblock %}
+{% block contenido %}
+    <div role="main" class="main shop pt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="breadcrumb breadcrumb-style-2 d-block text-4 mb-4">
+                        <li><a href="/"
+                               class="text-color-default text-color-hover-primary text-decoration-none">Inicio</a></li>
+                        <li><a href="/products?category={{ producto.categoria.id }}" class="text-color-default text-color-hover-primary text-decoration-none">Categoria</a>
+                        </li>
+                        <li>{{ producto.categoria.nombre }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-5 mb-md-0">
+
+                    <div class="thumb-gallery-wrapper">
+                        <img src="/media/{{ producto.portada }}" style="width: 100%" alt="">
+                    </div>
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <div class="summary entry-summary position-relative">
+
+                        <div class="position-absolute top-0 right-0">
+                            <div class="products-navigation d-flex">
+                                <a href="#"
+                                   class="prev text-decoration-none text-color-dark text-color-hover-primary border-color-hover-primary"
+                                   data-bs-toggle="tooltip" data-bs-animation="false"
+                                   data-bs-original-title="Red Ladies Handbag"><i class="fas fa-chevron-left"></i></a>
+                                <a href="#"
+                                   class="next text-decoration-none text-color-dark text-color-hover-primary border-color-hover-primary"
+                                   data-bs-toggle="tooltip" data-bs-animation="false"
+                                   data-bs-original-title="Green Ladies Handbag"><i
+                                        class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+
+                        <h1 class="mb-0 font-weight-bold text-7">{{ producto.nombre|upper }}</h1>
+
+                        <div class="pb-0 clearfix d-flex align-items-center">
+                                    <div class="myrating jq-stars float-start"></div>
+                            <div class="review-num">
+                                <a href="#description"
+                                   class="text-decoration-none text-color-default text-color-hover-primary" data-hash
+                                   data-hash-offset="0" data-hash-offset-lg="75"
+                                   data-hash-trigger-click=".nav-link-reviews" data-hash-trigger-click-delay="1000">
+                                    <span class="count text-color-inherit" itemprop="ratingCount">(2</span> Revisiones)
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="divider divider-small">
+                            <hr class="bg-color-grey-scale-4">
+                        </div>
+
+                        <p class="price mb-3">
+                            <span class="amount">$ {{ producto.total }}</span>
+                        </p>
+
+                        <p class="text-3-5 mb-3">
+                            {{ producto.descripcion }}
+                        </p>
+
+                        <ul class="list list-unstyled text-2">
+                            <li class="mb-0">Dispobibilidad: <strong class="text-color-dark">En Stock</strong></li>
+                            <li class="mb-0">Codigo Unico: <strong class="text-color-dark">{{ producto.id|stringformat:"09d" }}</strong></li>
+                        </ul>
+
+                        <form enctype="multipart/form-data" method="post" class="cart" action="shop-cart.html">
+                            <div class="quantity quantity-lg">
+                                <input type="button"
+                                       class="minus text-color-hover-light bg-color-hover-primary border-color-hover-primary"
+                                       value="-">
+                                <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity"
+                                       min="1" step="1">
+                                <input type="button"
+                                       class="plus text-color-hover-light bg-color-hover-primary border-color-hover-primary"
+                                       value="+">
+                            </div>
+                            <button type="submit"
+                                    class="btn btn-dark btn-modern text-uppercase bg-color-hover-primary border-color-hover-primary">
+                                Agregar al Carrito
+                            </button>
+                            <hr>
+                        </form>
+
+                        <div class="d-flex align-items-center">
+                            plugin de facebook
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <div id="description"
+                         class="tabs tabs-simple tabs-simple-full-width-line tabs-product tabs-dark mb-2">
+                        <ul class="nav nav-tabs justify-content-start">
+                            <li class="nav-item"><a
+                                    class="nav-link active font-weight-bold text-3 text-uppercase py-2 px-3"
+                                    href="#productDescription" data-bs-toggle="tab">Description</a></li>
+                            <li class="nav-item"><a class="nav-link font-weight-bold text-3 text-uppercase py-2 px-3"
+                                                    href="#productInfo" data-bs-toggle="tab">Additional Information</a>
+                            </li>
+                            <li class="nav-item"><a
+                                    class="nav-link nav-link-reviews font-weight-bold text-3 text-uppercase py-2 px-3"
+                                    href="#productReviews" data-bs-toggle="tab">Reviews (2)</a></li>
+                        </ul>
+                        <div class="tab-content p-0">
+                            <div class="tab-pane px-0 py-3 active" id="productDescription">
+                                {{producto.descripcion|linebreaks}}
+                            </div>
+                            <div class="tab-pane px-0 py-3" id="productInfo">
+                                <table class="table table-striped m-0">
+                                    <tbody>
+                                    <tr>
+                                        <th class="border-top-0">
+                                            Tamaño:
+                                        </th>
+                                        <td class="border-top-0">
+                                            {{ producto.tamanio }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Porciones:
+                                        </th>
+                                        <td>
+                                            {{ producto.porciones }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Entregar en:
+                                        </th>
+                                        <td>
+                                            {{ producto.retiro_en }}
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <th>
+                                            En oferta:
+                                        </th>
+                                        <td>
+                                            {% if producto.en_oferta %}Si{% else %}No{% endif %}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane px-0 py-3" id="productReviews">
+                                <ul class="comments">
+                                    <li>
+                                        <div class="comment">
+                                            <div class="img-thumbnail border-0 p-0 d-none d-md-block">
+                                                <img class="avatar rounded-circle" alt=""
+                                                     src="{% static 'img/avatars/avatar-2.jpg' %}">
+                                            </div>
+                                            <div class="comment-block">
+                                                <div class="comment-arrow"></div>
+                                                <span class="comment-by">
+															<strong>Jack Doe</strong>
+															<span class="float-end">
+																<div class="pb-0 clearfix">
+																	<div title="Rated 3 out of 5" class="float-start">
+																		<input type="text" class="d-none" value="3"
+                                                                               title="" data-plugin-star-rating
+                                                                               data-plugin-options="{'displayOnly': true, 'color': 'primary', 'size':'xs'}">
+																	</div>
+
+																	<div class="review-num">
+																		<span class="count"
+                                                                              itemprop="ratingCount">2</span> reviews
+																	</div>
+																</div>
+															</span>
+														</span>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+                                                    euismod odio, gravida pellentesque urna varius vitae, gravida
+                                                    pellentesque urna varius vitae.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment">
+                                            <div class="img-thumbnail border-0 p-0 d-none d-md-block">
+                                                <img class="avatar rounded-circle" alt="" src="{% static 'img/avatars/avatar.jpg' %}">
+                                            </div>
+                                            <div class="comment-block">
+                                                <div class="comment-arrow"></div>
+                                                <span class="comment-by">
+															<strong>John Doe</strong>
+															<span class="float-end">
+																<div class="pb-0 clearfix">
+																	<div title="Rated 3 out of 5" class="float-start">
+																		<input type="text" class="d-none" value="3"
+                                                                               title="" data-plugin-star-rating
+                                                                               data-plugin-options="{'displayOnly': true, 'color': 'primary', 'size':'xs'}">
+																	</div>
+
+																	<div class="review-num">
+																		<span class="count"
+                                                                              itemprop="ratingCount">2</span> reviews
+																	</div>
+																</div>
+															</span>
+														</span>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+                                                    odio, gravida urna varius vitae, gravida pellentesque urna varius
+                                                    vitae.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <hr class="solid my-5">
+                                <h4>Add a review</h4>
+                                <div class="row">
+                                    <div class="col">
+
+                                        <form action="" id="submitReview" method="post">
+                                            <div class="row">
+                                                <div class="form-group col pb-2">
+                                                    <label class="form-label required font-weight-bold text-dark">Rating</label>
+                                                    <input type="text" class="rating-loading" value="0" title=""
+                                                           data-plugin-star-rating
+                                                           data-plugin-options="{'color': 'primary', 'size':'sm'}">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-lg-6">
+                                                    <label class="form-label required font-weight-bold text-dark">Name</label>
+                                                    <input type="text" value=""
+                                                           data-msg-required="Please enter your name." maxlength="100"
+                                                           class="form-control" name="name" required>
+                                                </div>
+                                                <div class="form-group col-lg-6">
+                                                    <label class="form-label required font-weight-bold text-dark">Email
+                                                        Address</label>
+                                                    <input type="email" value=""
+                                                           data-msg-required="Please enter your email address."
+                                                           data-msg-email="Please enter a valid email address."
+                                                           maxlength="100" class="form-control" name="email" required>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col">
+                                                    <label class="form-label required font-weight-bold text-dark">Review</label>
+                                                    <textarea maxlength="5000"
+                                                              data-msg-required="Please enter your review." rows="8"
+                                                              class="form-control" name="review" id="review"
+                                                              required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col mb-0">
+                                                    <input type="submit" value="Post Review"
+                                                           class="btn btn-primary btn-modern"
+                                                           data-loading-text="Loading...">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h4 class="font-weight-semibold text-4 mb-3">OTROS PRODUCTOS RELACIONADOS</h4>
+                    <hr class="mt-0">
+                    <div class="products row">
+                        <div class="col">
+                            <div class="owl-carousel owl-theme nav-style-1 nav-outside nav-outside nav-dark mb-0"
+                                 data-plugin-options="{'loop': false, 'autoplay': false, 'items': 4, 'nav': true, 'dots': false, 'margin': 20, 'autoplayHoverPause': true, 'autoHeight': true, 'stagePadding': '75', 'navVerticalOffset': '50px'}">
+                                {% for product in productos %}
+                                <div class="product mb-0">
+                                    <div class="product-thumb-info border-0 mb-3">
+                                        <div class="product-thumb-info-badges-wrapper">
+                                            <span class="badge badge-ecommerce badge-success">Para {{ producto.retiro_en }}</span>
+                                        </div>
+                                        <a href="/products?id={{ product.id }}"
+                                           class="quick-view text-uppercase font-weight-semibold text-2">
+                                            Ver detalles
+                                        </a>
+                                        <a href="/products?id={{ product.id }}">
+                                            <div class="product-thumb-info-image">
+                                                <img alt="" class="img-fluid" src="/media/{{ product.portada }}">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <a class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">{{ product.categoria.nombre }}</a>
+                                            <h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                                <a href="/products?id={{ product.id }}"
+                                                   class="text-color-dark text-color-hover-primary">{{ product.nombre }}</a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div title="Rated 5 out of 5">
+                                        <input type="text" class="d-none" value="5" title="" data-plugin-star-rating
+                                               data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">
+                                    </div>
+                                    <p class="price text-5 mb-3">
+                                        <span class="amount">$ {{ product.total }}</span>
+                                    </p>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.countdown/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'vendor/elevatezoom/jquery.elevatezoom.min.js' %}"></script>
+    <script src="{% static 'js/views/view.shop.js' %}"></script>
+    <script src="{% static 'star-rating-svg/dist/jquery.star-rating-svg.min.js' %}"></script>
+    <script>
+   $(".myrating").starRating({
+      initialRating: 4,
+      strokeColor: '#894A00',
+      strokeWidth: 10,
+      starSize: 25
+    });
+    </script>
+{% endblock %}
